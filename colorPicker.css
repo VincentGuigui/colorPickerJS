@@ -1,0 +1,19 @@
+﻿.colorPickerCursor {
+    cursor: crosshair;
+}
+
+.colorPicker {
+    border: 2px solid grey;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    margin-top: -35px;
+    margin-left: -35px;
+    position: absolute;
+    display: none;
+}
+
+    .colorPicker.touchenabled {
+        margin-top: -55px;
+        margin-left: -55px;
+    }
