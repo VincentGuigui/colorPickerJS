@@ -32,15 +32,19 @@
     }
 
     function getContextFromImg(img) {
-        var context = document.createElement('canvas').getContext('2d');
+        var canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var context = canvas.getContext('2d');
         context.drawImage(img, 0, 0, img.width, img.height);
         return context
     }
 
-    function RGBToHex(r, g, b) {
+    function RGBToHex(r, g, b, a = 255) {
         r = r.toString(16);
         g = g.toString(16);
         b = b.toString(16);
+        a = a.toString(16);
 
         if (r.length == 1)
             r = "0" + r;
@@ -48,8 +52,10 @@
             g = "0" + g;
         if (b.length == 1)
             b = "0" + b;
+        if (a.length == 1)
+            a = "0" + a;
 
-        return "#" + r + g + b;
+        return "#" + r + g + b + a;
     }
 
     function triggerEvent(colorPicker, eventName) {
@@ -106,7 +112,6 @@
         target.context = null;
     }
 
-
     function onColorPickerMove(e) {
         colorPicker = getColorPickerFromTarget(e.target);
         cls = e.target.className.replace("colorPickerCursor", "").trim();
@@ -122,8 +127,8 @@
             colorPicker.style.top = pageY + "px";
             colorPicker.style.left = pageX + "px";
             pixel = e.target.context.getImageData(x, y, 1, 1)['data'];
-            colorPicker.style.background = RGBToHex(pixel[0], pixel[1], pixel[2]);
-            colorPicker.setAttribute("color", RGBToHex(pixel[0], pixel[1], pixel[2]));
+            colorPicker.style.background = RGBToHex(pixel[0], pixel[1], pixel[2], pixel[3]);
+            colorPicker.setAttribute("color", RGBToHex(pixel[0], pixel[1], pixel[2], pixel[3]));
         }
         else
             colorPicker.style.display = "none";
