@@ -23,10 +23,10 @@ Have look at this [samples page](http://vincentguigui.github.io/ColorPickerJS/sa
 ## 1. Include the script and CSS
 Include the script and CSS in your page either in the HEAD tag using defer:
 ```
-	<script src="colorPicker.js" type="text/javascript" defer></script>
+<script src="colorPicker.js" type="text/javascript" defer></script>
 ```
 ```
-    <link rel="stylesheet" type="text/css" href="colorPicker.css" />
+<link rel="stylesheet" type="text/css" href="colorPicker.css" />
 ```
 
 ## 2. Add a colorPicker element in your page
@@ -43,22 +43,22 @@ For example:
 ## Recommended Integration: Only with HTML attributes
 You can integrate the colorPicker in your page with only HTML:
 ```
-	<img id="img" src="image.jpg" />
-	<button id="btn">Pick a color</button>
-	<div class="colorPicker" for="img" trigger="btn" onchange="console.log(this.value)"></div>
+<img id="img" src="image.jpg" />
+<button id="btn">Pick a color</button>
+<div class="colorPicker" for="img" trigger="btn" onchange="console.log(this.value)"></div>
 ```
 
 ## Integration: with HTML attributes and JS handler
 You can integrate the colorPicker in your page with only HTML and use a JS event to handle color change:
 ```
-	<img id="img" src="image.jpg" />
-	<button id="btn">Pick a color</button>
-	<div class="colorPicker" for="img" trigger="btn" onchange="onColorPickerChanged"></div>
-	<script>
-		function onColorPickerChanged(e) {
-			console.log(e.value)
-		}
-	</script>
+<img id="img" src="image.jpg" />
+<button id="btn">Pick a color</button>
+<div class="colorPicker" for="img" trigger="btn" onchange="onColorPickerChanged"></div>
+<script>
+	function onColorPickerChanged(e) {
+		console.log(e.value)
+	}
+</script>
 ```
 
 
@@ -69,24 +69,24 @@ You can integrate the colorPicker in your page with only HTML and use a JS event
 	- onColorPickerEnabled event is fired when the colorPicker has been enabled
 	- onColorPickerDisabled event is fired when the colorPicker has been disabled
 ```
-	<img id="img" src="image.jpg" />
-	<button id="btn">Pick a color</button>
-	<div class="colorPicker" for="img"></div>
-	<script>
-		btn.addEventListener('click', function () {
-			var colorPicker = document.querySelector('.colorPicker');
-			colorPicker.addEventListener("onchange", function (e) {
-				console.log(e.detail.value);
-			});
-			colorPicker.addEventListener("onColorPickerEnabled", function (e) {
-				console.log("onColorPickerEnabled");
-			});
-			colorPicker.addEventListener("onColorPickerDisabled", function (e) {
-				console.log("onColorPickerDisabled");
-			});
-			colorPicker.enableColorPicker();
+<img id="img" src="image.jpg" />
+<button id="btn">Pick a color</button>
+<div class="colorPicker" for="img"></div>
+<script>
+	btn.addEventListener('click', function () {
+		var colorPicker = document.querySelector('.colorPicker');
+		colorPicker.addEventListener("onchange", function (e) {
+			console.log(e.detail.value);
 		});
-	</script>
+		colorPicker.addEventListener("onColorPickerEnabled", function (e) {
+			console.log("onColorPickerEnabled");
+		});
+		colorPicker.addEventListener("onColorPickerDisabled", function (e) {
+			console.log("onColorPickerDisabled");
+		});
+		colorPicker.enableColorPicker();
+	});
+</script>
 ```
 
 
