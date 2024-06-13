@@ -1,4 +1,4 @@
-# Silmple ColorPicker in Javascript
+# Simple ColorPicker in Javascript
 This lightweight Color Picker in Javascript will extract the color of an Image based on mouse position on this image.
 
 It can be inserted with almost no knowledge on JS or CSS and has no external dependency (jQuery, ...)
