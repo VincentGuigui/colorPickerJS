@@ -14,20 +14,88 @@
             colorPicker.disableColorPicker = disableColorPicker;
             trigger = colorPicker.getAttribute("trigger");
             if (trigger) {
-                trigger = document.getElementById(trigger);
+                trigger = document.querySelector(trigger);
                 trigger.addEventListener('click', function (e) {
                     colorPicker.enableColorPicker();
                 });
             }
         });
+
+        var inputColors = document.querySelectorAll("input[type=color].simpleColorPicker");
+        inputColors.forEach((inputColor) => {
+            let imgColor = document.createElement("img");
+            inputColor.parentNode.insertBefore(imgColor, inputColor.nextSibling);
+            imgColor.className = inputColor.className;
+            imgColor.id = inputColor.id + "Img";
+            imgColor.width = inputColor.getAttribute("width");
+            imgColor.height = inputColor.getAttribute("height");
+            imgColor.style.background = inputColor.value;
+            inputColor.imgColor = imgColor;
+            imgColor.inputColor = inputColor;
+            inputColor.style = "padding:0px;margin:0px;border:none;background:none;width:0px;height:0px;block-size:0px;visibility:hidden;";
+            inputColor.setColor = function (color) {
+                this.valueRGBA = color;
+                if (color && color.length > 7) { // transparent 
+                    this.setAttribute("transparent", "true");
+                    this.imgColor.setAttribute("transparent", "true");
+                    this.value = color.substring(0, 7);
+                    this.imgColor.style.background = "";
+                }
+                else {
+                    this.value = color;
+                    this.imgColor.style.background = this.value;
+                }
+            };
+            inputColor.setColor(inputColor.value);
+
+            imgColor.addEventListener('dblclick', function (e) {
+                if (this.inputColor.getAttribute("allowTransparency") == "true") {
+                    clearTimeout(this.clickDelay);
+                    if (this.getAttribute("transparent") == "true") {
+                        this.setAttribute("transparent", "false");
+                        this.inputColor.setAttribute("transparent", "false");
+                        this.style.background = this.inputColor.value;
+                        this.inputColor.dispatchEvent(new Event("change"));
+                        this.inputColor.dispatchEvent(new Event("input"));
+                    }
+                    else {
+                        this.setAttribute("transparent", "true");
+                        this.inputColor.setAttribute("transparent", "true");
+                        this.inputColor.dispatchEvent(new Event("input"));
+                        this.inputColor.dispatchEvent(new Event("change"));
+                    }
+                }
+            });
+            imgColor.addEventListener('click', function (e) {
+                if (e.detail === 1)
+                    this.clickDelay = setTimeout(() => {
+                        this.setAttribute("transparent", "false");
+                        this.inputColor.setAttribute("transparent", "false");
+                        this.style.background = this.inputColor.value;
+                        this.inputColor.dispatchEvent(new Event("input"));
+                        this.inputColor.click();
+                    }, 300);
+
+            });
+            inputColor.addEventListener('input', function (e) {
+                if (this.imgColor.getAttribute("transparent") == "true") {
+                    this.valueRGBA = this.value + "00";
+                    this.imgColor.style.background = "";
+                }
+                else {
+                    this.valueRGBA = this.value;
+                    this.imgColor.style.background = this.value;
+                }
+            });
+        });
     }
     function getTargetFromColorPicker(colorPicker) {
-        target = document.getElementById(colorPicker.getAttribute("for"));
+        target = document.querySelector(colorPicker.getAttribute("for"));
         return target;
     }
 
     function getColorPickerFromTarget(target) {
-        colorPicker = document.querySelector("[for=" + target.id + "]");
+        colorPicker = target.colorPicker;
         return colorPicker;
     }
 
@@ -93,6 +161,7 @@
         target.addEventListener('touchstart', onColorPickerMove);
         target.addEventListener('touchmove', onColorPickerMove);
         target.addEventListener('touchend', onColorPickerClick);
+        target.colorPicker = this;
         triggerEvent(colorPicker, "onColorPickerEnabled")
     }
 
@@ -101,7 +170,7 @@
         target = getTargetFromColorPicker(colorPicker);
         colorPicker.style.display = "none";
         target.className = target.className.replace("colorPickerCursor", "").trim();
-        target = document.getElementById(colorPicker.getAttribute("for"));
+        target = document.querySelector(colorPicker.getAttribute("for"));
         target.removeEventListener('click', onColorPickerClick);
         target.removeEventListener('mousemove', onColorPickerMove);
         target.removeEventListener('mouseleave', onColorPickerMove);
