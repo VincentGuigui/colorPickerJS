@@ -15,7 +15,7 @@ Add the script (colorPicker.js) and CSS (colorPicker.css) in your page and your 
 - Works on images
 
 # Samples
-Have look at this [samples page](http://vincentguigui.github.io/ColorPickerJS/samples.html) to see how it looks.
+Have look at this [samples page](http://vincentguigui.github.io/colorPickerJS/samples.html) to see how it looks.
 ![ColorPicker samples!](samples.png)
 
 # Usage
