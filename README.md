@@ -36,16 +36,16 @@ For example:
 <div class="colorPicker" [attributes]>content</div>
 ```
 [attributes] are optional and can be used to customize the colorPicker (see below)
-	- (mandatory) for="idOfTheImage": id of the image to pick the color from
-	- (optional) trigger="idOfClickableElement": id of the element that will trigger the colorPicker"
-	- (optional) onchange="functionName": function to call when the color has been picked
+- (mandatory) for="imageSelector": selector of the image to pick the color from
+- (optional) trigger="clickableElementSelector": selector of the element that will trigger the colorPicker"
+- (optional) onchange="functionName": function to call when the color has been picked
 
 ## Recommended Integration: Only with HTML attributes
 You can integrate the colorPicker in your page with only HTML:
 ```
 <img id="img" src="image.jpg" />
 <button id="btn">Pick a color</button>
-<div class="colorPicker" for="img" trigger="btn" onchange="console.log(this.value)"></div>
+<div class="colorPicker" for="#img" trigger="#btn" onchange="console.log(this.value)"></div>
 ```
 
 ## Integration: with HTML attributes and JS handler
@@ -53,7 +53,7 @@ You can integrate the colorPicker in your page with only HTML and use a JS event
 ```
 <img id="img" src="image.jpg" />
 <button id="btn">Pick a color</button>
-<div class="colorPicker" for="img" trigger="btn" onchange="onColorPickerChanged"></div>
+<div class="colorPicker" for="#img" trigger="#btn" onchange="onColorPickerChanged"></div>
 <script>
 	function onColorPickerChanged(e) {
 		console.log(e.value)
@@ -71,7 +71,7 @@ You can integrate the colorPicker in your page with only HTML and use a JS event
 ```
 <img id="img" src="image.jpg" />
 <button id="btn">Pick a color</button>
-<div class="colorPicker" for="img"></div>
+<div class="colorPicker" for="#img"></div>
 <script>
 	btn.addEventListener('click', function () {
 		var colorPicker = document.querySelector('.colorPicker');
