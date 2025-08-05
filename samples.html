@@ -27,11 +27,11 @@
                 <h2>Using HTML attributes only</h2>
                 <button id="btn">ColorPicker</button><br />
                 <img id="img" src="lenna.png" width="300" height="300" />
-                <div class="colorPicker" for="img" trigger="btn" onchange="btn.style.backgroundColor = this.value"></div>
+                <div class="colorPicker" for="#img" trigger="#btn" onchange="btn.style.backgroundColor = this.value"></div>
                 <br />
                 <pre>
                 <code>
-&lt;div class="colorPicker" for="img" trigger="btn" 
+&lt;div class="colorPicker" for="#img" trigger="#btn" 
 onchange="btn.style.backgroundColor = this.value"&gt;&lt;/div&gt;
                     </code>
                 </pre>
@@ -40,7 +40,7 @@ onchange="btn.style.backgroundColor = this.value"&gt;&lt;/div&gt;
                 <h2>Using HTML attributes and JS event</h2>
                 <button id="btn2">ColorPicker</button><br />
                 <img id="img2" src="lenna.png" width="300" />
-                <div class="colorPicker" for="img2" trigger="btn2" onchange="onColorPickerChanged"></div>
+                <div class="colorPicker" for="#img2" trigger="#btn2" onchange="onColorPickerChanged"></div>
                 <script>
                     function onColorPickerChanged(e) {
                         btn2.style.backgroundColor = e.value;
@@ -49,7 +49,7 @@ onchange="btn.style.backgroundColor = this.value"&gt;&lt;/div&gt;
                 <pre>
                 <code>
 &lt;div class="colorPicker" 
-for="img" trigger="btn" 
+for="#img" trigger="#btn" 
 onchange="onColorPickerChanged"&gt;&lt;/div&gt;
 
 function onColorPickerChanged(e) {
@@ -64,7 +64,7 @@ function onColorPickerChanged(e) {
                 <h2>Using JavaScript</h2>
                 <button id="btn3">ColorPicker</button><br />
                 <img id="img3" src="lenna.png" width="300" />
-                <div id="colorPicker3" class="colorPicker" for="img3"></div>
+                <div id="colorPicker3" class="colorPicker" for="#img3"></div>
                 <script>
                     btn3.addEventListener('click', function () {
                         var colorPicker = document.querySelector("#colorPicker3");
@@ -82,7 +82,7 @@ function onColorPickerChanged(e) {
                 </script>
                 <pre>
                 <code>
-&lt;div class="colorPicker" for="img" &gt;&lt;/div&gt;
+&lt;div class="colorPicker" for="#img" &gt;&lt;/div&gt;
 
 btn.addEventListener('click', function () {
     var colorPicker = document.querySelector('.colorPicker');
